@@ -1,0 +1,11 @@
+# Optimized ByteTrack Configuration for Continuous Vehicle Tracking
+# High-persistence settings to prevent ID breaks across motion blur & distance
+
+tracker_type: bytetrack
+track_high_thresh: 0.25      # High-confidence first-stage matching threshold
+track_low_thresh: 0.05       # Low-confidence second-stage recovery threshold (keeps blurred cars alive)
+new_track_thresh: 0.35       # Minimum confidence to initialize a NEW vehicle track
+track_buffer: 120            # Keep lost tracks alive for 120 frames (~4-5 seconds) during occlusions & flare
+match_thresh: 0.70           # Sticky IoU association threshold
+fuse_score: True             # Fuse detection confidence score with motion IoU
+

@@ -1,0 +1,199 @@
+Repo 1 — ai-service
+
+Responsibility: Camera + OpenCV + YOLO + Tracking + ANPR/OCR + Re-ID
+
+APIs
+
+POST /api/v1/events/detection
+POST /api/v1/events/batch
+GET  /api/v1/cameras/{camera_id}/status  - 
+POST /api/v1/cameras/{camera_id}/heartbeat - 
+
+Work:
+
+Capture/process camera feed
+
+Detect vehicles- yolo
+
+Track vehicles- yolo
+
+Detect/read  number plates -ANPR/OCR
+
+Generate vehicle embeddings- [23432 4235234 23523543]
+
+Create detection events       
+{
+camera_id
+timestamp
+local_track_id
+vehicle_type
+plate_number
+plate_confidence 
+vehicle_embedding
+vehicle_confidence
+bounding_box
+}
+
+
+Send events to Backend
+
+Report camera/AI service status
+
+AI → Backend: Detection/Event data
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+Repo 2 — backend
+
+Responsibility: Database + Vehicle Identity + Trajectory + Analytics + Authentication
+
+
+APIs for AI
+
+POST /api/v1/events/detection
+POST /api/v1/events/batch
+
+APIs for Frontend
+
+GET  /api/v1/vehicles/{vehicle_id}
+GET  /api/v1/vehicles/{vehicle_id}/trajectory
+GET  /api/v1/vehicles/{vehicle_id}/events
+GET  /api/v1/vehicles/search
+
+GET  /api/v1/cameras
+GET  /api/v1/cameras/{camera_id}
+
+GET  /api/v1/traffic
+GET  /api/v1/traffic/{camera_id}
+GET  /api/v1/traffic/route/{route_id}
+
+GET  /api/v1/analytics/overview
+GET  /api/v1/analytics/cameras/{camera_id}
+
+POST /api/v1/auth/login
+POST /api/v1/auth/refresh
+GET  /api/v1/auth/me
+
+Real-time
+
+WS /api/v1/ws/traffic
+WS /api/v1/ws/vehicle/{vehicle_id}
+
+Work:
+
+Receive AI events
+
+Store events in PostgreSQL(victor databace)/PostGIS
+
+Generate/maintain global vehicle ID
+
+Cross-camera matching
+
+Build trajectories - HMM - Hidden Markov Model, Vitervi algo
+
+Camera/location/deraction management- 
+
+Traffic analytics
+
+Authentication/authorization
+
+Provide APIs to Frontend
+
+Push real-time updates
+
+
+
+---
+
+Repo 3 — frontend
+
+Responsibility: UI + Map + Visualization
+
+Frontend does NOT create backend APIs.
+
+It consumes Backend APIs:
+
+GET /vehicles/{vehicle_id}
+GET /vehicles/{vehicle_id}/trajectory
+GET /vehicles/search
+
+GET /cameras
+GET /cameras/{camera_id}
+
+GET /traffic
+GET /traffic/{camera_id}
+GET /traffic/route/{route_id}
+
+GET /analytics/overview
+
+POST /auth/login
+GET /auth/me
+
+WS /ws/traffic
+WS /ws/vehicle/{vehicle_id}
+
+Work:
+
+Login
+
+Public traffic dashboard
+
+Authorized dashboard
+
+Vehicle search
+
+Vehicle details
+
+Trajectory on MapLibre
+
+Camera visualization
+
+Traffic heatmap
+
+Congestion indicators
+
+Charts/analytics
+
+Real-time updates
+
+
+
+---
+
+Simple Dependency
+
+AI SERVICE
+    │
+    │ Detection Events
+    ↓
+BACKEND
+    │
+    ├── PostgreSQL/PostGIS
+    ├── Vehicle Matching
+    ├── Trajectory Engine
+    └── Traffic Analytics
+    │
+    │ REST + WebSocket
+    ↓
+FRONTEND
+
+Most important rule
+
+AI owns AI APIs.
+Backend owns business/data APIs.
+Frontend owns UI only.
+
+So your team can work independently without constantly modifying each other's repositories.

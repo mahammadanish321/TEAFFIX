@@ -1,0 +1,180 @@
+Yes. For 4 people, I’d divide it into 4 feature ownership areas, not 4 repositories.
+
+Person 1 — Computer Vision / Camera Pipeline
+
+Owns the entire vehicle-perception pipeline:
+
+Camera/RTSP/video input
+
+OpenCV
+
+YOLO vehicle detection
+
+ByteTrack / BoT-SORT tracking
+
+Vehicle classification
+
+Bounding boxes
+
+Local vehicle IDs
+
+Frame preprocessing
+
+AI performance/FPS
+
+Detection event generation
+
+
+Output:
+
+Camera → Detection → Tracking → Local Vehicle Event
+
+
+---
+
+Person 2 — ANPR + Vehicle Re-ID
+
+Owns vehicle identity intelligence:
+
+License-plate detection
+
+OCR / ANPR
+
+Plate preprocessing
+
+OCR confidence
+
+Plate correction/fuzzy matching
+
+Vehicle embedding generation
+
+Vehicle Re-ID
+
+Embedding similarity
+
+Cross-camera matching logic
+
+Global Vehicle ID
+
+
+Output:
+
+Detection → Plate + Embedding → Global Vehicle Identity
+
+This person works closely with Person 1 because the AI pipeline produces the vehicle images/tracks they need.
+
+
+---
+
+Person 3 — Backend + Database + Trajectory
+
+Owns the system's core intelligence/data layer:
+
+FastAPI
+
+API implementation
+
+PostgreSQL
+
+PostGIS
+
+Redis if needed
+
+Detection-event storage
+
+Camera management
+
+Vehicle records
+
+Cross-camera event storage
+
+Trajectory reconstruction
+
+Route/camera graph
+
+Vehicle history
+
+Authentication & authorization
+
+
+Output:
+
+AI Events → Database → Global Vehicle → Trajectory ,[geoJSON]
+
+
+---
+
+Person 4 — Frontend + GIS + Traffic Analytics
+
+Owns everything the user sees:
+
+React + TypeScript
+
+MapLibre
+
+Public dashboard
+
+Authorized dashboard
+
+Vehicle search
+
+Vehicle details
+
+Individual trajectory visualization
+
+Camera visualization
+
+Traffic heatmap
+
+Congestion visualization
+
+Traffic charts
+
+Real-time updates
+
+WebSocket frontend integration
+
+
+Output:
+
+Backend → Map + Dashboard + Real-Time Visualization
+
+
+---
+
+The overall division
+
+PERSON 1
+CAMERA + DETECTION + TRACKING
+              │
+              ↓
+PERSON 2
+ANPR + OCR + RE-ID + GLOBAL ID
+              │
+              ↓
+PERSON 3
+BACKEND + DATABASE + TRAJECTORY
+              │
+              ↓
+PERSON 4
+GIS + DASHBOARD + TRAFFIC ANALYTICS
+
+But don't make these isolated.
+
+The important shared contracts are:
+
+P1 → P2
+Vehicle Track Data
+
+P2 → P3
+Vehicle Identity / Detection Event
+
+P3 → P4
+Vehicle + Trajectory + Traffic APIs
+
+P3 ↔ P4
+Real-time WebSocket
+
+And everyone shares responsibility for testing and integration.
+
+For your SIH project, this is a much better 4-person division because each person has a complete feature area, while the interfaces between them remain clearly defined.
