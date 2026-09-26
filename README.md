@@ -172,12 +172,22 @@ npm run desktop
 ## 🧠 Algorithmic Core & Analytics
 
 ### 1. Shortest Path & Road Routing
-* **Graph Engine**: Open Source Routing Machine (OSRM) with OpenStreetMap Kolkata road graph.
-* **Routing Algorithm**: **Contraction Hierarchies (CH)** and **Multi-Level Dijkstra (MLD)** for $<1\text{ ms}$ shortest driving path computation.
+* **Graph Engine**: Open Source Routing Machine (OSRM) with OpenStreetMap road graph.
+* **Routing Algorithm**: **Contraction Hierarchies (CH)** and **Multi-Level Dijkstra (MLD)** for `< 1 ms` shortest driving path computation.
 * **Trajectory Smoothing**: **Catmull-Rom Splines** combined with **Ramer-Douglas-Peucker (RDP)** polyline simplification.
 
 ### 2. Vehicle Tracking State Machine
-$$\text{State Transitions: } \text{NEW} \xrightarrow{\text{hits } \ge 3} \text{ACTIVE} \xrightarrow{\text{missed } \le 120} \text{TEMPORARILY\_LOST} \rightarrow \text{ENDED}$$
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> NEW: Initial BBox Detection
+    NEW --> ACTIVE: Consecutive Hits ≥ 3
+    ACTIVE --> TEMPORARILY_LOST: Missed ≤ 120 frames
+    TEMPORARILY_LOST --> ACTIVE: Re-Identified
+    TEMPORARILY_LOST --> ENDED: Lost > 120 frames
+    ENDED --> [*]
+```
 
 ---
 
