@@ -195,10 +195,23 @@ stateDiagram-v2
 
 ---
 
-## 📄 License & Team Credits
+## 👥 Team & Contributor Credits
 
 Developed with ❤️ for **Smart India Hackathon (SIH 2026)**.
 
-* **Project Lead / Author**: [Mahammad Anish](https://github.com/mahammadanish321)
-* **Organization**: Smart India Hackathon (SIH) 2026
+| Sl | Member Name | Role / Designation | Department | Roll Number | Year / Sem | Email |
+|:---:|:---|:---|:---:|:---:|:---:|:---|
+| 👑 | **Mahammad Anish** | **Team Leader** (Full-Stack & CV Architect) | CSE | `28100124030` | 3rd Yr (5th Sem) | [anish130905@gmail.com](mailto:anish130905@gmail.com) |
+| ⚡ | **Soumen Pore** | Team Member | ECE | `28100324010` | 3rd Yr (5th Sem) | [soumenpore7777@gmail.com](mailto:soumenpore7777@gmail.com) |
+| ⚡ | **Ranjit Bhandary** | Team Member | CSE | `28100124059` | 3rd Yr (5th Sem) | [ranjitbhandary15@gmail.com](mailto:ranjitbhandary15@gmail.com) |
+| ⚡ | **Rahul Mangal** | Team Member | CSE | `28100124028` | 3rd Yr (5th Sem) | [rajupagalworld123@gmail.com](mailto:rajupagalworld123@gmail.com) |
+| ⚡ | **Aviyash Yadav** | Team Member | CSE | `28100124003` | 3rd Yr (5th Sem) | [suresh.yadav4624@gmail.com](mailto:suresh.yadav4624@gmail.com) |
+| ⚡ | **Shrestha Mukherjee** | Team Member | ECE | `28100324008` | 3rd Yr (5th Sem) | [shresthastudy100@gmail.com](mailto:shresthastudy100@gmail.com) |
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — built for evaluation under Smart India Hackathon 2026.
+
 
