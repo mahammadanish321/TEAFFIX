@@ -25,15 +25,17 @@ Modern smart cities struggle with fragmented traffic surveillance, optical chara
 
 ---
 
-## 🎬 Live Prototype Demo Video
+## 🎬 Live Prototype Demo
 
 <div align="center">
 
-[![Watch Prototype Demo Video](https://img.shields.io/badge/▶%20Watch%20Live%20Prototype%20Demo%20Video-Cloudinary%20Stream-E11D48?style=for-the-badge&logo=youtube)](https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4)
+<a href="https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4" target="_blank">
+  <img src="./docs/demo.gif" alt="TRAFFIX AI Live Prototype Demo" width="100%" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
+</a>
 
-🔗 **Direct Video URL**: [https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4](https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4)
+<p><em>👆 <b>Live Prototype in Action</b> — Click the video above to stream the full 1080p demo with audio.</em></p>
 
-<video src="https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4" width="100%" controls="true"></video>
+[![Watch Full Demo Video](https://img.shields.io/badge/▶%20Watch%20Full%201080p%20Demo%20Stream-Cloudinary%20CDN-E11D48?style=for-the-badge&logo=youtube)](https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4)
 
 </div>
 
