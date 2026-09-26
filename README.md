@@ -25,6 +25,20 @@ Modern smart cities struggle with fragmented traffic surveillance, optical chara
 
 ---
 
+## 🎬 Live Prototype Demo Video
+
+<div align="center">
+
+[![Watch Prototype Demo Video](https://img.shields.io/badge/▶%20Watch%20Live%20Prototype%20Demo%20Video-Cloudinary%20Stream-E11D48?style=for-the-badge&logo=youtube)](https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4)
+
+🔗 **Direct Video URL**: [https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4](https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4)
+
+<video src="https://res.cloudinary.com/dmi7vzu8w/video/upload/v1790389429/our_backend_so_poyq8j.mp4" width="100%" controls="true"></video>
+
+</div>
+
+---
+
 ## 🏗️ System Architecture
 
 ```mermaid
