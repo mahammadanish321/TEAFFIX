@@ -47,7 +47,7 @@ Modern urban traffic management faces challenges in multi-camera vehicle trackin
 flowchart LR
     subgraph Edge["Edge AI & Video Ingestion (Traffix_Ai :8002)"]
         direction TB
-        CCTV["CCTV Feed Ingestion<br/><i>(Park St, Esplanade, Salt Lake, Howrah, Gariahat)</i>"]
+        CCTV["CCTV Feed Ingestion<br/>Park St, Esplanade, Salt Lake, Howrah, Gariahat"]
         
         subgraph Pipeline["Computer Vision & ANPR Pipeline"]
             direction TB
@@ -91,7 +91,7 @@ flowchart LR
     %% Inter-service Communication
     VOTE ==>|HTTP POST Ingestion Events| REST
     STREAM ==>|Direct MJPEG Video Stream| POPUP
-    WS ==>|WebSocket Push (<50ms)| MAP
+    WS ==>|Sub-50ms WebSocket Push| MAP
     WS ==>|Telemetry & Alert Events| ANALYTICS
 ```
 
