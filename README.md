@@ -44,51 +44,55 @@ Modern smart cities struggle with fragmented traffic surveillance, optical chara
 ## 🏗️ System Architecture
 
 ```mermaid
-flowchart TD
-    subgraph CCTV_Streams["🎥 Edge CCTV Feeds & Video Sources"]
-        C1["Park Street Junction (CAM_001)"]
-        C2["Esplanade Crossing (CAM_002)"]
-        C3["Salt Lake Sector V (CAM_003)"]
-        C4["Howrah Bridge (CAM_004)"]
-        C5["Gariahat Junction (CAM_005)"]
+flowchart LR
+    subgraph Edge["🧠 Edge AI & Surveillance (Traffix_Ai :8002)"]
+        direction TB
+        CCTV["📹 Multi-Junction CCTV Streams<br/><i>(Park St, Esplanade, Salt Lake, Howrah, Gariahat)</i>"]
+        
+        subgraph Pipeline["⚡ Deep Learning ANPR Pipeline"]
+            direction TB
+            YOLO["1. YOLOv8 Vehicle Detector"]
+            BT["2. ByteTrack Persistent Tracker"]
+            LPD["3. YOLO Plate Localizer"]
+            OCR["4. EasyOCR + CLAHE Filter"]
+            VOTE["5. Multi-Frame Consensus Voting"]
+            YOLO --> BT --> LPD --> OCR --> VOTE
+        end
+
+        STREAM["📡 Low-Latency MJPEG Streamer"]
+        
+        CCTV --> Pipeline
+        CCTV -.-> STREAM
     end
 
-    subgraph AI_Engine["🧠 Traffix_Ai Edge Daemon (Port 8002)"]
-        YOLO["YOLOv8 Vehicle Detection"]
-        BT["ByteTrack Persistent Multi-Object Tracker"]
-        LPD["YOLO License Plate Detector"]
-        OCR["EasyOCR Engine + Syntax Cleaner"]
-        VOTE["Per-Track Multi-Frame Voting Accumulator"]
-        MJPEG["Real-Time Annotated MJPEG Streamer"]
-    end
-
-    subgraph Central_Backend["⚙️ trafix.backend Gateway (Port 8000)"]
+    subgraph Backend["⚙️ Central Hub (trafix.backend :8000)"]
+        direction TB
         REST["REST API Server (Express.js)"]
-        WS["WebSocket Real-Time Event Hub"]
-        REID["Multi-Camera Re-ID Transit Matcher"]
-        STORE["In-Memory & Persistent State Store"]
+        STORE[("In-Memory & State Store")]
+        REID["Multi-Camera Re-ID Matcher"]
+        WS["WebSocket Real-Time Gateway"]
+
+        REST <--> STORE
+        REST --> REID
+        REID --> WS
     end
 
-    subgraph Desktop_GUI["💻 TraffixAI-F 3D Command Center (Port 8081 / Electron)"]
-        MAP["MapLibre GL 3D WebGL Digital Twin"]
-        OSRM["OSRM Road-Following Geometry Engine"]
-        ANALYTICS["Live Telemetry & Congestion Analytics"]
-        POPUP["Camera Popups & Live MJPEG Feeds"]
+    subgraph Frontend["💻 3D Digital Twin (TraffixAI-F :8081)"]
+        direction TB
+        MAP["MapLibre 3D WebGL Digital Twin"]
+        OSRM["OSRM Road Geometry Engine"]
+        ANALYTICS["Real-Time Congestion Analytics"]
+        POPUP["Live Camera POPUP & MJPEG Feeds"]
+
+        OSRM --> MAP
+        ANALYTICS -.-> MAP
     end
 
-    CCTV_Streams --> YOLO
-    YOLO --> BT
-    BT --> LPD
-    LPD --> OCR
-    OCR --> VOTE
-    VOTE --> MJPEG
-    VOTE -->|HTTP POST Detection Events| REST
-    MJPEG -->|MJPEG Live Stream| POPUP
-    REST --> WS
-    REST --> REID
-    WS -->|Real-Time WS Push| Desktop_GUI
-    REID -->|Multi-Camera Route Alerts| MAP
-    OSRM -->|Road Graph Geometry| MAP
+    %% Data Flow Connections
+    VOTE ==>|HTTP POST Detection Events| REST
+    STREAM ==>|Direct MJPEG Video Stream| POPUP
+    WS ==>|Real-Time WebSocket Push| MAP
+    WS ==>|Telemetry & Alert Events| ANALYTICS
 ```
 
 ---
